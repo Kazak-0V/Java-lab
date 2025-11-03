@@ -28,7 +28,7 @@ public class Main {
         System.out.println("Числа: " + numbers);
         System.out.println("Модули: " + absolute);
 
-        // Массивы -> максимумы (с вводом и проверками)
+        // Массивы -> максимумы 
         int count;
         while (true) {
             System.out.print("Сколько массивов: ");
@@ -83,4 +83,5 @@ public class Main {
 
         scanner.close();
     }
+
 }
