@@ -30,7 +30,7 @@ public class Main {
         System.out.println("Числа: " + numbers);
         System.out.println("После фильтра: " + filteredNumbers);
 
-        // Массивы без положительных (с вводом и проверками)
+        // Массивы без положительных 
         int count;
         while (true) {
             System.out.print("Сколько массивов: ");
@@ -84,4 +84,5 @@ public class Main {
 
         scanner.close();
     }
+
 }
