@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // 1. Разделение чисел на положительные и отрицательные
+        // Разделение чисел на положительные и отрицательные
         List<Integer> numbers = Arrays.asList(1, -3, 7, -5, 0, -2);
 
         List<Integer> positiveNumbers = collect(
@@ -42,16 +42,16 @@ public class Main {
         System.out.println("Положительные: " + positiveNumbers);
         System.out.println("Отрицательные: " + negativeNumbers);
 
-        // 2. Группировка строк по длине
+        // Группировка строк по длине
         List<String> strings = Arrays.asList("qwerty", "asdfg", "zx", "qw");
 
-        // Собираем уникальные длины
+        // уникальные длины
         Set<Integer> lengths = new HashSet<>();
         for (String s : strings) {
             lengths.add(s.length());
         }
 
-        // Создаем список для каждой длины
+        // список для каждой длины
         Map<Integer, List<String>> groupedByLength = new HashMap<>();
         for (int length : lengths) {
             List<String> sameLength = collect(
@@ -65,13 +65,13 @@ public class Main {
         System.out.println("Строки: " + strings);
         System.out.println("Сгруппированные по длине: " + groupedByLength);
 
-        // 3. Уникальные строки
+        // уникальные строки
         List<String> stringsWithDuplicates = Arrays.asList("qwerty", "asdfg", "qwerty", "qw");
 
         Set<String> uniqueStrings = collect(
                 stringsWithDuplicates,
                 HashSet::new,
-                s -> true  // добавляем все, HashSet сам уберет дубликаты
+                s -> true  
         );
 
         System.out.println("Строки с дубликатами: " + stringsWithDuplicates);
@@ -79,4 +79,5 @@ public class Main {
 
         scanner.close();
     }
+
 }
