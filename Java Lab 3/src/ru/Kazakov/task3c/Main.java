@@ -20,19 +20,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // 1. Строки -> одна большая строка
+        // Строки -> одна большая строка
         List<String> strings = Arrays.asList("qwerty", "asdfg", "zx");
         String combinedString = reduce(strings, (s1, s2) -> s1 + s2, "");
         System.out.println("Строки: " + strings);
         System.out.println("Объединенная строка: " + combinedString);
 
-        // 2. Числа -> сумма
+        // Числа -> сумма
         List<Integer> numbers = Arrays.asList(1, -3, 7);
         Integer sum = reduce(numbers, (a, b) -> a + b, 0);
         System.out.println("Числа: " + numbers);
         System.out.println("Сумма: " + sum);
 
-        // 3. Списки чисел -> общее количество элементов (с проверками ввода)
+        // Списки чисел -> общее количество элементов 
         int listCount;
         while (true) {
             System.out.print("Сколько списков: ");
@@ -76,7 +76,7 @@ public class Main {
             listOfLists.add(innerList);
         }
 
-        // Одно действие: создаем общий список и берем его размер
+        // создаем общий список и берем его размер
         List<Integer> allNumbers = new ArrayList<>();
         for (List<Integer> innerList : listOfLists) {
             allNumbers.addAll(innerList);
@@ -88,4 +88,5 @@ public class Main {
 
         scanner.close();
     }
+
 }
