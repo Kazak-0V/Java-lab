@@ -27,7 +27,6 @@ public class Main {
         Box<Point> parentBox = new Box<>();
         Box<Object> objectBox = new Box<>();
 
-        // Точка начала отсчета (0,0,0)
         putOriginPoint(exactBox);
         putOriginPoint(parentBox);
         putOriginPoint(objectBox);
@@ -50,4 +49,5 @@ public class Main {
 
         scanner.close();
     }
+
 }
