@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать усыновление</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <nav class="mb-4">
+        <a href="/adoptions" class="btn btn-secondary">← Назад к усыновлениям</a>
+    </nav>
+
+    <h1>✏️ Редактировать усыновление</h1>
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Редактирование усыновления ID: <span th:text="${adoption.id}"></span></h5>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/adoptions/update}" th:object="${adoption}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Животное *</label>
+                        <select name="animalId" class="form-select" required>
+                            <option value="">Выберите животное...</option>
+                            <option th:each="animal : ${animals}"
+                                    th:value="${animal.id}"
+                                    th:selected="${animal.id == adoption.animal.id}"
+                                    th:text="${animal.name} + ' (' + ${animal.type} + ')'">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Усыновитель *</label>
+                        <select name="adopterId" class="form-select" required>
+                            <option value="">Выберите усыновителя...</option>
+                            <option th:each="adopter : ${adopters}"
+                                    th:value="${adopter.id}"
+                                    th:selected="${adopter.id == adoption.adopter.id}"
+                                    th:text="${adopter.lastName} + ' ' + ${adopter.firstName}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Дата усыновления *</label>
+                        <input type="date" th:field="*{adoptionDate}"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        <a href="/adoptions" class="btn btn-secondary">Отмена</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

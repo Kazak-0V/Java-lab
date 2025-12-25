@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Животные приюта</title>
+    <!-- Bootstrap для красивого вида -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <nav class="mb-4">
+        <a href="/" class="btn btn-secondary">🏠 Главная</a>
+        <span class="mx-2">|</span>
+        <a href="/animals" class="btn btn-primary">🐶 Животные</a>
+        <a href="/adopters" class="btn btn-outline-primary">👥 Усыновители</a>
+        <a href="/procedures" class="btn btn-outline-primary">🏥 Процедуры</a>
+        <a href="/adoptions" class="btn btn-outline-primary">🏠 Усыновления</a>
+    </nav>
+    <h1 class="text-center mb-4">🐶 Учёт животных в приюте</h1>
+
+    <!-- Форма добавления -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5>Добавить новое животное</h5>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/animals/add}" th:object="${animal}" method="post">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Кличка *</label>
+                        <input type="text" th:field="*{name}" class="form-control" placeholder="Бобик" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Вид *</label>
+                        <select th:field="*{type}" class="form-select" required>
+                            <option value="">Выберите...</option>
+                            <option value="кошка">Кошка</option>
+                            <option value="собака">Собака</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Возраст (мес) *</label>
+                        <input type="number" th:field="*{ageMonths}" class="form-control" min="0" max="360" placeholder="12" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Пол *</label>
+                        <select th:field="*{gender}" class="form-select" required>
+                            <option value="">Выберите...</option>
+                            <option value="м">Мужской</option>
+                            <option value="ж">Женский</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Порода</label>
+                        <input type="text" th:field="*{breed}" class="form-control" placeholder="Овчарка">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Статус *</label>
+                        <select th:field="*{status}" class="form-select" required>
+                            <option value="на карантине">На карантине</option>
+                            <option value="на лечении">На лечении</option>
+                            <option value="готов к усыновлению">Готов к усыновлению</option>
+                            <option value="усыновлен">Усыновлен</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-success">Добавить животное</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Список животных -->
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h5>Список животных (всего: <span th:text="${animals.size()}"></span>)</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Кличка</th>
+                        <th>Вид</th>
+                        <th>Порода</th>
+                        <th>Возраст</th>
+                        <th>Пол</th>
+                        <th>Статус</th>
+                        <th>Дата поступления</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="animal : ${animals}">
+                        <td th:text="${animal.id}"></td>
+                        <td th:text="${animal.name}"></td>
+                        <td th:text="${animal.type}"></td>
+                        <td th:text="${animal.breed} ?: '—'"></td>
+                        <td th:text="${animal.ageMonths} + ' мес.'"></td>
+                        <td>
+                            <span th:if="${animal.gender == 'м'}" class="badge bg-primary">М</span>
+                            <span th:if="${animal.gender == 'ж'}" class="badge bg-danger">Ж</span>
+                        </td>
+                        <td>
+                                <span th:if="${animal.status == 'готов к усыновлению'}"
+                                      class="badge bg-success">Готов к усыновлению</span>
+                            <span th:if="${animal.status == 'на карантине'}"
+                                  class="badge bg-warning">На карантине</span>
+                            <span th:if="${animal.status == 'на лечении'}"
+                                  class="badge bg-danger">На лечении</span>
+                            <span th:if="${animal.status == 'усыновлен'}"
+                                  class="badge bg-secondary">Усыновлен</span>
+                        </td>
+                        <td th:text="${animal.admissionDate}"></td>
+                        <td>
+                            <a th:href="@{/animals/edit/{id}(id=${animal.id})}"
+                               class="btn btn-warning btn-sm">✏️</a>
+                            <a th:href="@{/animals/delete/{id}(id=${animal.id})}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Удалить животное?')">🗑️</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
