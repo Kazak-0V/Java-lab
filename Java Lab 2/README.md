@@ -1,4 +1,4 @@
-<img width="591" height="219" alt="image" src="https://github.com/user-attachments/assets/11ff8f38-4612-4ece-8c07-62ad1ca31658" />Казаков Никита ИТ-8 Лабораторная №2
+Казаков Никита ИТ-8 Лабораторная №2
 
 ================================================================================================
 
@@ -158,6 +158,7 @@ toString(): "Линия от {X1;Y1} до {X2;Y2}"
 Автоматическое упрощение дробей через НОД
 
 <img width="941" height="1177" alt="image" src="https://github.com/user-attachments/assets/51aab78c-9e8d-4a9f-a34c-cb77e5904fdc" />
+
 
 
 
